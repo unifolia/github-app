@@ -3,14 +3,14 @@ import { render, screen } from '@testing-library/react';
 import api from './GitHubApi';
 
 describe('Content tests', () => {
-    test('cmp mounts', () => {
+    test('App loads', () => {
         render(
             <App />
         );
         expect(screen.getByTestId('header')).toBeInTheDocument();        
     });
 
-    test('get repos from api', async () => {
+    test('Successfully fetch endpoint data', async () => {
             render(
                 <App />
             );

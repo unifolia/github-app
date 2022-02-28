@@ -68,11 +68,11 @@ const RepoProvider = ({ children }: ProviderProps) => {
     };
 
     const fetchData = async () => {
-        const data = await api();
-
-        if (data.length) {
-            setRepos(data);
-        }
+        await api().then(data => {
+            if (data.length) {
+                setRepos(data);
+            }
+        });
     };
 
     const filteredByLanguage = repos.filter(item => {

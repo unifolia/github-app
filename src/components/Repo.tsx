@@ -27,8 +27,8 @@ const Repo = ({ description, html_url, id, language, name, stargazers_count }: I
     const showLanguageFilter = () => {
         if (language) {
             return (
-                <LanguageToggle onClick={setLanguageFilter} languageActive={state.selectedLanguage}>{language} 
-                    Repos
+                <LanguageToggle onClick={setLanguageFilter} languageActive={state.selectedLanguage}>
+                    Filter {language}
                 </LanguageToggle>
             ) 
         } else {
