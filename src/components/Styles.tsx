@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 // Sorry for stealing
-const colourPalette = {
+export const colourPalette = {
     veedGreen: 'rgba(35, 236, 164, 0.2)',
     veedPink: 'rgba(255, 119, 168, 1)',
     veedYellow: 'rgba(254, 208, 119, 0.5)',

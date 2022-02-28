@@ -73,6 +73,7 @@ const RepoProvider = ({ children }: ProviderProps) => {
                 setRepos(data);
             }
         });
+
     };
 
     const filteredByLanguage = repos.filter(item => {

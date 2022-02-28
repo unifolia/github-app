@@ -10,7 +10,11 @@ const FavouriteButton = ({ id }: IFavouriteButton) => {
     const isFav = state.favRepos.includes(id);
 
     return (  
-        <FavButton isFav={isFav} onClick={() => { actions.addToFavourites(id) }}>
+        <FavButton 
+            data-testid="fav"
+            isFav={isFav} 
+            onClick={() => { actions.addToFavourites(id) }}
+        >
             ♥
         </FavButton>
     );
