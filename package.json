@@ -1,6 +1,7 @@
 {
   "name": "cool-github-app-3000",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
@@ -44,6 +45,5 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.23"
-  },
-  "homepage": "http://jameslewis.io/veed-demo"
+  }
 }
