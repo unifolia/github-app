@@ -12,8 +12,8 @@ interface IRepo {
     stargazers_count: number,
 };
 
-const Repo = ({ name, html_url, stargazers_count, language, id, description }: IRepo) => {
-    const { state, actions } = useRepoContext();
+const Repo = ({ description, html_url, id, language, name, stargazers_count }: IRepo) => {
+    const { actions, state } = useRepoContext();
     const isFav = state.favRepos.includes(id);
 
     const setLanguageFilter = () => {
@@ -27,7 +27,9 @@ const Repo = ({ name, html_url, stargazers_count, language, id, description }: I
     const showLanguageFilter = () => {
         if (language) {
             return (
-                <LanguageToggle onClick={setLanguageFilter} languageActive={state.selectedLanguage}>{language} Repos</LanguageToggle>
+                <LanguageToggle onClick={setLanguageFilter} languageActive={state.selectedLanguage}>{language} 
+                    Repos
+                </LanguageToggle>
             ) 
         } else {
             return (
@@ -37,13 +39,14 @@ const Repo = ({ name, html_url, stargazers_count, language, id, description }: I
     };
 
     return (
-        <RepoListItem key={name} isFav={isFav}>
+        <RepoListItem key={name} isFav={isFav} data-testid="repo">
             <FavouriteButton id={id} />
             <ItemH2 isFav={isFav}>Name: {name}</ItemH2>
             <ItemH3 isFav={isFav}>Stars: {stargazers_count}</ItemH3>
             <ItemH3 isFav={isFav}>Language: {language} { showLanguageFilter() }
             </ItemH3>
-            <ItemH3 isFav={isFav}>Location: <ItemA isFav={isFav} href={html_url}>{html_url}</ItemA>
+            <ItemH3 isFav={isFav}>Location:&nbsp; 
+                <ItemA isFav={isFav} href={html_url}>{html_url}</ItemA>
             </ItemH3>
 
             <ItemP isFav={isFav}>Description: {description}</ItemP>

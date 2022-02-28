@@ -10,19 +10,19 @@ const colourPalette = {
     veedGreenText: '#30715a',
 }
 
-interface IProps {
+interface Props {
     isFav: boolean;
 }
 
-interface ILanguageToggle {
+interface LanguageToggleProps {
     languageActive: string;
 }
 
-interface IRepoListItem extends IProps {
+interface RepoListItemProps extends Props {
     key: string;
 }
 
-const selectedColour = () => css<IProps>`
+const selectedColour = () => css<Props>`
   color: ${props => props.isFav ? colourPalette.veedGreenText : '#192033'};
 `
 
@@ -47,7 +47,11 @@ export const StyledH1 = styled.h1`
     margin: 0;
 `
 
-export const SelectedLanguage = styled.span`
+export const SelectedLanguageHeading = styled.h2`
+    // 
+`
+
+export const SelectedLanguageSpan = styled.span`
     color: ${colourPalette.veedBrown};
 `
 
@@ -87,7 +91,7 @@ export const ReposList = styled.ul`
 `;
 
 // Items
-export const RepoListItem = styled.li<IRepoListItem>`
+export const RepoListItem = styled.li<RepoListItemProps>`
     border-radius: 20px;
 
     margin-bottom: 20px;
@@ -98,7 +102,7 @@ export const RepoListItem = styled.li<IRepoListItem>`
     };
 `;
 
-export const FavButton = styled.button<IProps>`
+export const FavButton = styled.button<Props>`
     border: none;
     background: none;
     cursor: pointer;
@@ -109,7 +113,7 @@ export const FavButton = styled.button<IProps>`
     };
 `;
 
-export const LanguageToggle = styled.button<ILanguageToggle>`
+export const LanguageToggle = styled.button<LanguageToggleProps>`
     padding: 6px 11px;
     border-radius: 1000px;
     border: none;

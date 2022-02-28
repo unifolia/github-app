@@ -1,9 +1,21 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
 import App from './App';
+import { render, screen } from '@testing-library/react';
+import api from './GitHubApi';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('Content tests', () => {
+    test('cmp mounts', () => {
+        render(
+            <App />
+        );
+        expect(screen.getByTestId('header')).toBeInTheDocument();        
+    });
+
+    test('get repos from api', async () => {
+            render(
+                <App />
+            );
+            await api().then(() => {
+                expect(screen.getAllByTestId('repo').length).not.toBeLessThan(0);
+            });
+    }, 7000);
 });

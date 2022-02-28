@@ -1,11 +1,7 @@
 import { useRepoContext } from '../RepoProvider';
-import { StyledHeader, StyledH1, OnlyFavouritesButton, SelectedLanguage } from './Styles';
+import { StyledHeader, StyledH1, OnlyFavouritesButton, SelectedLanguageHeading, SelectedLanguageSpan } from './Styles';
 
-interface IProps {
-    selectedLanguage: string;
-};
-
-const Header = ( {selectedLanguage}: IProps ) => {
+const Header = () => {
   const { actions, state } = useRepoContext();
 
   const handleToggleRepos = () => {
@@ -14,9 +10,10 @@ const Header = ( {selectedLanguage}: IProps ) => {
 
   return (
       <StyledHeader>
-        <StyledH1>Trending GitHub Repos</StyledH1>
-        <h2>Selected Language: <SelectedLanguage>{selectedLanguage}</SelectedLanguage>
-        </h2>
+        <StyledH1 data-testid="header">Trending GitHub Repos</StyledH1>
+        <SelectedLanguageHeading>Selected Language:&nbsp; 
+          <SelectedLanguageSpan>{state.selectedLanguage}</SelectedLanguageSpan>
+        </SelectedLanguageHeading>
         <OnlyFavouritesButton onClick={handleToggleRepos}>
           Only Favourites
         </OnlyFavouritesButton>

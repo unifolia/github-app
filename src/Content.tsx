@@ -1,47 +1,41 @@
+import { useEffect } from 'react';
 import Repo from './components/Repo';
 import Header from './components/Header';
-import { useRepoContext } from './RepoProvider';
+import { useRepoContext, RepoProps } from './RepoProvider';
 import { Main, ReposList } from './components/Styles';
-import { useEffect, useState } from 'react';
-
-import axios from 'axios';
 
 const Content = () => {
-    const githubEndpoint = 'https://api.github.com/search/repositories?q=created:%3E2017-01-10&sort=stars&order=desc';
+    const { state, actions } = useRepoContext();
 
-    const [allRepos, setRepoArray] = useState<any[]>([]);
-    const { state } = useRepoContext();
+    const filteredRepos: Array<RepoProps> = state.showOnlyFavRepos ?
+    [...state.filteredByLanguage].filter((item) => state.favRepos.includes((item as any).id)) : state.filteredByLanguage;
 
     useEffect(() => {
-        axios.get(githubEndpoint).then(res => {
-            setRepoArray(res.data.items);
-        })
-    }, []);
+        if (!state.repos.length) {
+            actions.fetchData();
+        }
+    }, [actions, state]);
 
-    const favouritedRepos = [...allRepos]
-    .filter((item) => state.favRepos.includes((item as any).id));
-        
-    const isFavorited = state.showOnlyFavRepos ? favouritedRepos : allRepos;
-
-    const filteredLanguageArray = isFavorited.filter((item) => {
-        if (state.selectedLanguage) {
-            return item.language === state.selectedLanguage;
-        } else {
-            return item;
-        };
-    });
 
     return (
         <>
-            <Header selectedLanguage={state.selectedLanguage}/>
+            <Header />
             <Main>
                 <ReposList>
-                {filteredLanguageArray.map(item => {
-                    let { name, html_url, stargazers_count, language, id, description } = item;
+                    {filteredRepos.map((item: RepoProps) => {
+                        let { description, html_url, id, language, name, stargazers_count } = item;
 
-                    return (
-                        <Repo key={name} name={name} html_url={html_url} stargazers_count={stargazers_count} language={language} id={id} description={description}/>
-                    )
+                        return (
+                            <Repo
+                                description={description}
+                                html_url={html_url}
+                                id={id}
+                                key={name}
+                                language={language}
+                                name={name}
+                                stargazers_count={stargazers_count}
+                            />
+                        )
                 })}
                 </ReposList>
             </Main>
